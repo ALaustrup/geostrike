@@ -51,9 +51,15 @@ npm run vercel:prod
 
 Set the same `NEXT_PUBLIC_*` variables in the Vercel project. Mapbox URL restrictions should include your `*.vercel.app` host.
 
-## Repo
+## Documentation
 
-GitHub: [github.com/ALaustrup/geostrike](https://github.com/ALaustrup/geostrike)  
+Full documentation (architecture, map layers, Vault sync, Supabase, deployment, roadmap):
+
+**[docs/README.md](./docs/README.md)**
+
+## Repository
+
+GitHub: [github.com/ALaustrup/geostrike](https://github.com/ALaustrup/geostrike)
 
 ---
 
