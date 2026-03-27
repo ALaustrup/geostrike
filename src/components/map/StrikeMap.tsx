@@ -5,18 +5,29 @@ import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
 import { cn } from "@/lib/utils";
-import type { MapLayerToggles } from "@/types/geostrike";
+import type { HudMapLayerToggles } from "@/types/geostrike";
 
 const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
+/** Mapbox layer IDs to wire when GeoJSON/raster sources are loaded (Claim Guardian, breadcrumbs, etc.). */
+const HUD_LAYER_BINDINGS: Partial<
+  Record<keyof HudMapLayerToggles, string>
+> = {
+  claimBoundaries: "geostrike-claims-fill",
+  breadcrumbHeatmap: "geostrike-breadcrumb-heat",
+  contactZones: "geostrike-contacts-line",
+  faultLines: "geostrike-faults-line",
+  stratigraphyOverlay: "geostrike-strata-raster",
+  indicatorHalos: "geostrike-halos-fill",
+};
+
 export interface StrikeMapProps {
   className?: string;
-  layers: MapLayerToggles;
+  layers: HudMapLayerToggles;
 }
 
 /**
- * Full-viewport Mapbox GL map with 3D terrain and satellite imagery.
- * Claim / log vector layers are wired in follow-up tasks; toggles are reserved on the map chrome.
+ * Mapbox GL HUD — satellite + 3D terrain. Layer toggles bind to sources as they are onboarded.
  */
 export function StrikeMap({ className, layers }: StrikeMapProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -87,20 +98,18 @@ export function StrikeMap({ className, layers }: StrikeMapProps) {
   useEffect(() => {
     const map = mapRef.current;
     if (!map?.isStyleLoaded()) return;
-    // Placeholder: visibility hooks for GeoJSON sources `geostrike-claims` / `geostrike-logs`
     try {
-      if (map.getLayer("geostrike-claims-fill"))
-        map.setLayoutProperty(
-          "geostrike-claims-fill",
-          "visibility",
-          layers.officialClaims ? "visible" : "none",
-        );
-      if (map.getLayer("geostrike-logs-circle"))
-        map.setLayoutProperty(
-          "geostrike-logs-circle",
-          "visibility",
-          layers.myLogs ? "visible" : "none",
-        );
+      (Object.entries(HUD_LAYER_BINDINGS) as [keyof HudMapLayerToggles, string][]).forEach(
+        ([key, layerId]) => {
+          if (map.getLayer(layerId)) {
+            map.setLayoutProperty(
+              layerId,
+              "visibility",
+              layers[key] ? "visible" : "none",
+            );
+          }
+        },
+      );
     } catch {
       /* layers not yet added */
     }

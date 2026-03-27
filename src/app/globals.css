@@ -28,6 +28,16 @@
     --strike-emerald: 158 64% 52%;
   }
 
+  /* Sunlight-readable HUD (toggle from header) */
+  html.hud-sunlit {
+    --background: 220 35% 7%;
+    --foreground: 210 30% 98%;
+    --card: 220 32% 10%;
+    --border: 220 25% 22%;
+    --primary: 43 100% 52%;
+    --muted-foreground: 215 18% 72%;
+  }
+
   html {
     @apply h-full;
   }

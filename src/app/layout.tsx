@@ -16,9 +16,12 @@ const robotoMono = Roboto_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "GeoStrike — Mining intelligence",
+  title: {
+    default: "GeoStrike — Expedition & Mining OS",
+    template: "%s | GeoStrike",
+  },
   description:
-    "High-fidelity claim mapping, mineral logging, and offline-first sync for field operations.",
+    "Operating-system HUD for gold-seeking teams: OSGeo mapping, Claim Guardian, expedition log, recovery intelligence, and offline Vault sync.",
 };
 
 export default function RootLayout({

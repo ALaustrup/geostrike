@@ -323,15 +323,16 @@ export function QuickLogFab({ saveLogLocally, online }: QuickLogFabProps) {
           className="fixed bottom-6 right-6 z-30 h-14 rounded-full px-6 shadow-lg shadow-amber-500/20 md:bottom-8 md:right-8"
         >
           <Crosshair className="mr-2 h-5 w-5" />
-          Quick-Log
+          Assay
         </Button>
       </DialogTrigger>
       <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Field log</DialogTitle>
+          <DialogTitle>Digital Assay Book</DialogTitle>
           <DialogDescription>
-            Capture GPS, mineral type, and notes. Data is written to the Vault
-            first; sync runs when {online ? "connected" : "back online"}.
+            GPS, mineral context, and notes — written to the Vault first; sync
+            when {online ? "connected" : "back online"}. Photos attach in a
+            follow-up storage hook.
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-3 py-2">

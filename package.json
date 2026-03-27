@@ -13,7 +13,7 @@
     "vercel:login": "vercel login",
     "vercel:link": "vercel link",
     "vercel:deploy": "vercel deploy",
-    "vercel:prod": "vercel deploy --prod"
+    "vercel:prod": "vercel deploy --prod --yes"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.15",
